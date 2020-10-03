@@ -1,0 +1,128 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Customerapplication
+{
+    class Program
+    {
+       public class Customer
+        {
+            public int customerID; 
+            public string customerName; 
+            public string customeraddress;
+
+            public Customer(int id, string name,string address)
+            {
+                customerID = id;
+                customerName = name;
+                customeraddress = address;
+            }
+
+
+        }
+
+
+       public class Customermanager
+        {
+            int i = 0, size;
+            Customer[] array=null;
+           public void maxsizeofcustomer(int count)
+            {
+                size = count;
+            }
+
+           public void addcustomer(Customer cstmr)
+            {
+                for(int i=0;i<size;i++)
+                {
+                    if (array[i] != null)
+                    {
+                        array[i] = cstmr;
+                        break;
+                    }
+
+                    else
+                        i++;
+                }
+              
+            }
+
+          public void removecustomer(int id)
+            {
+                for(i=0;i<size;i++)
+                {
+                    if(array[i].customerID==id)
+                    {
+                        array[i] = null;
+                    }
+                }
+            }
+
+           public void updatecustomerinfo(int id)
+            {
+                for (i = 0; i < size; i++)
+                {
+                    if (array[i].customerID == id)
+                    {
+                        Console.WriteLine("enter the information to be updated\n");
+                        array[i].customerName = Console.ReadLine();
+                        array[i].customeraddress= Console.ReadLine();
+                    }
+                }
+            }
+
+           public void getcustomerlist()
+            {
+                for (i = 0; i < size; i++)
+                {
+                    Console.WriteLine("The details of the customer are as follows\n");
+                    Console.WriteLine(array[i].customerName + "\n");
+                    Console.WriteLine(array[i].customerID + "\n");
+                    Console.WriteLine(array[i].customeraddress + "\n");
+                }
+
+            }
+        }
+
+
+        static void Main(string[] args)
+        {
+            int choice;
+            Console.WriteLine("Welcome to customer management\n");
+            for(; ; )
+            {
+                Console.WriteLine("Welcome to customer management.....Choose the action to be performed\n");
+                choice = int.Parse(Console.ReadLine());
+                switch(choice)
+                {
+                    case 1 : Console.WriteLine("add a customer\n");
+                             Customer c1 = new Customer(1, "abc", "aassssbbb");
+                             addcustomer(c1);
+                             break;
+
+                    case 2: Console.WriteLine("delete a customer\n");
+                            removecustomer(2);
+                            break;
+
+                    case 3:
+                        Console.WriteLine("update a customer\n");
+                        updatecustomerinfo(1);
+                        break;
+
+                    case 4: Console.WriteLine("get customer list\n");
+                        getcustomerlist();
+                        break;
+
+                    default: Console.WriteLine("wrong choice\n");
+                        break;
+
+
+                }
+            }
+
+        }
+    }
+}
