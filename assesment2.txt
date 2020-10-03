@@ -1,0 +1,40 @@
+using System;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+
+
+namespace Binaryserialisation
+{
+    [Serializable]
+    public class Customer
+    {
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public long Phonenumber { get; set; }
+        public override string ToString()
+        {
+            return string.Format($"The name: {Name} from {Address} is available at {Phonenumber}");
+        }
+    }
+    class Serialization
+    {
+        static void Main(string[] args)
+        {
+            serialization();
+            Console.ReadKey();
+        }
+
+        private static void serialization()
+        {
+            Customer c1 = new Customer{ Address = "hubli", Name = "sri", Phonenumber = 1234567 };
+            BinaryFormatter fm = new BinaryFormatter();
+            FileStream fs = new FileStream("Sample.bin", FileMode.OpenOrCreate, FileAccess.Write);
+            fm.Serialize(fs, c1);
+            fs.Close();
+        }
+
+        
+
+        
+    }
+}
